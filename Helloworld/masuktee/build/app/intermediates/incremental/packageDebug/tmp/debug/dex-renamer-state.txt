@@ -1,0 +1,4 @@
+#Wed Nov 20 15:58:57 ICT 2019
+base.0=D\:\\KMUTT\\CPE 101 Expo\\FinalProject\\learn\\githubtest\\Helloworld\\masuktee\\build\\app\\intermediates\\transforms\\dexMerger\\debug\\0
+path.0=classes.dex
+renamed.0=classes.dex
