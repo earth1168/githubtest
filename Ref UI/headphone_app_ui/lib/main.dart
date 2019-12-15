@@ -12,7 +12,7 @@ void main() => runApp(MaterialApp(
 
 class MyApp extends StatefulWidget {
   @override
-  _MyAppState createState() => _MyAppState();               //เปิดรูปไม่ได้ไม่รู้เป็นอะไร
+  _MyAppState createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
@@ -50,7 +50,7 @@ class _MyAppState extends State<MyApp> {
                     onPressed: () {},
                   ),
                   IconButton(
-                    icon: Icon(CustomIcons.camera),
+                    icon: Icon(CustomIcons.cart),
                     onPressed: () {},
                   )
                 ],
@@ -58,7 +58,7 @@ class _MyAppState extends State<MyApp> {
             ),
             Padding(
               padding: EdgeInsets.only(left: 25),
-              child: Text("MOVIE", style: headingStyle), 
+              child: Text("Shop", style: headingStyle),
             ),
             SizedBox(
               height: 22,
@@ -94,7 +94,7 @@ class _MyAppState extends State<MyApp> {
             ),
             Padding(
               padding: EdgeInsets.only(left: 25),
-              child: Text("Suggest Movie", style: headingStyle),
+              child: Text("Headphones", style: headingStyle),
             ),
             SizedBox(
               height: 16,
@@ -121,7 +121,7 @@ class _MyAppState extends State<MyApp> {
                 children: <Widget>[
                   Padding(
                     padding: EdgeInsets.only(left: 8),
-                    child: Text("Hit Movie", style: speakerTitleStyle),
+                    child: Text("Speakers", style: speakerTitleStyle),
                   ),
                   Align(
                     alignment: Alignment.bottomCenter,
@@ -145,11 +145,11 @@ class _MyAppState extends State<MyApp> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Text("Star Wars : Episode VIII", style: productTitleStyle),
+                              Text("Rålis", style: productTitleStyle),
                               SizedBox(
                                 height: 4,
                               ),
-                              Text("The last Jedi , IMDb : 7.1\n Mark Hamill ,...",
+                              Text("Haute Red, Slate Blue,\nMist Grey",
                                   style: speakerdescStyle)
                             ],
                           ),
@@ -160,7 +160,7 @@ class _MyAppState extends State<MyApp> {
                   Positioned(
                     right: 15,
                     top: -5,
-                    child: Image.asset("image4.png",
+                    child: Image.asset("assets/speaker.png",
                         fit: BoxFit.cover, width: 150, height: 160),
                   )
                 ],
