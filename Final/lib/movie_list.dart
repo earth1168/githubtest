@@ -155,7 +155,7 @@ class MovieListState extends State<MovieList> {
 
 Future<Map> getJson() async {
   var apiKey = getApiKey();
-  var searchmovie = 'avenger';
+  var searchmovie = 'spiderman';
   var url = 'https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchmovie}';
   var response = await http.get(url);
   return json.decode(response.body);

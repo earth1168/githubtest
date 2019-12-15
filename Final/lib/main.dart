@@ -211,10 +211,11 @@ class _MyAppState extends State<MyApp> {
                       ),
                       InkWell(
                         onTap: () {
-                            Navigator.push(
+                          Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => RegisterRoute()), //ย้ายหน้า
+                                builder: (context) =>
+                                    RegisterRoute()), //ย้ายหน้า
                           );
                         },
                         child: Text("SignUp",
@@ -244,8 +245,6 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-
-
 class HomeRoute extends StatefulWidget {
   @override
   HomeRouteState createState() =>
@@ -264,14 +263,12 @@ class HomeRouteState extends State<HomeRoute> {
   void changePage(int index) {
     setState(() {
       _currentIndex = index;
-      if(index==2){
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => MovieRoute()), //ย้ายหน้า
-                          );        
+      if (index == 2) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => MovieRoute()), //ย้ายหน้า
+        );
       }
-
     });
   }
 
@@ -435,7 +432,6 @@ class HomeRouteState extends State<HomeRoute> {
               icon: Icon(
                 Icons.home,
                 color: Colors.black,
-                
               ),
               activeIcon: Icon(Icons.home, color: Colors.white),
               title: Text("Home", style: bottomBarItemStyle),
@@ -450,15 +446,12 @@ class HomeRouteState extends State<HomeRoute> {
                 title: Text("Shop", style: bottomBarItemStyle)),
             BubbleBottomBarItem(
                 backgroundColor: Colors.black,
-                
                 icon: Icon(
-                  Icons.favorite_border,                  
+                  Icons.favorite_border,
                   color: Colors.black,
-                  
                 ),
                 activeIcon: Icon(Icons.favorite_border, color: Colors.white),
-                title: Text("Favorite", style: bottomBarItemStyle)
-                ),
+                title: Text("Favorite", style: bottomBarItemStyle)),
             BubbleBottomBarItem(
                 backgroundColor: Colors.black,
                 icon: Icon(
@@ -554,62 +547,66 @@ class PhotoTextState extends State<PhotoText> {
     for (TextBlock block in readText.blocks) {
       for (TextLine line in block.lines) {
         print(line.text);
-        /*
-        for (TextElement word in line.elements) {
-          print(word.text);          
-        }*/
-      }
-    }
-  }
-
-  /*
-  Future decode() async {
-    FirebaseVisionImage ourImage = FirebaseVisionImage.fromFile(pickedImage);
-    BarcodeDetector barcodeDetector = FirebaseVision.instance.barcodeDetector();
-    List barCodes = await barcodeDetector.detectInImage(ourImage);
-
-    for (Barcode readableCode in barCodes) {
-      print(readableCode.displayValue);
-    }
-  }
- */
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        body: Column(
-      children: <Widget>[
-        SizedBox(height: 100.0),
-        isImageLoaded
-            ? Center(
-                child: Container(
-                    height: 200.0,
-                    width: 200.0,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: FileImage(imageFile), fit: BoxFit.cover))),
-              )
-            : Container(),
-         _decideImageView(),    
-        SizedBox(height: 10.0),
-        RaisedButton(
-          onPressed: () {
-            showChoiceDialog(context);
-          },
-          child: Text('Pick an image'),
-        ),
-        SizedBox(height: 10.0),
-        RaisedButton(
-          child: Text('Read Text'),
-          onPressed: readText,
-        ),
-        /*
-        RaisedButton(
-          child: Text('Read Bar Code'),
-          onPressed: decode,
-        )*/
-      ],
-    ));
-  }
+        sprintf(line.text);
+                /*
+                for (TextElement word in line.elements) {
+                  print(word.text);          
+                }*/
+              }
+            }
+          }
+        
+          /*
+          Future decode() async {
+            FirebaseVisionImage ourImage = FirebaseVisionImage.fromFile(pickedImage);
+            BarcodeDetector barcodeDetector = FirebaseVision.instance.barcodeDetector();
+            List barCodes = await barcodeDetector.detectInImage(ourImage);
+        
+            for (Barcode readableCode in barCodes) {
+              print(readableCode.displayValue);
+            }
+          }
+         */
+          @override
+          Widget build(BuildContext context) {
+            return Scaffold(
+                body: Column(
+              children: <Widget>[
+                SizedBox(height: 100.0),
+                isImageLoaded
+                    ? Center(
+                        child: Container(
+                            height: 200.0,
+                            width: 200.0,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image: FileImage(imageFile), fit: BoxFit.cover))),
+                      )
+                    : Container(),
+ 
+                SizedBox(height: 10.0),
+                RaisedButton(
+                  onPressed: () {
+                    showChoiceDialog(context);
+                  },
+                  child: Text('Pick an image'),
+                ),
+                SizedBox(height: 10.0),
+                RaisedButton(
+                  child: Text('Read Text'),
+                  onPressed: readText,
+                ),
+                /*
+                RaisedButton(
+                  child: Text('Read Bar Code'),
+                  onPressed: decode,
+                )*/
+              ],
+            ));
+          }
+        }
+        
+        void sprintf(String text) {
 }
 
 class MovieRoute extends StatelessWidget {
@@ -617,7 +614,6 @@ class MovieRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: MovieList(),
     );
   }
@@ -641,7 +637,6 @@ class SecondRoute extends StatelessWidget {
     );
   }
 }
-
 
 class RegisterRoute extends StatefulWidget {
   @override
@@ -836,10 +831,11 @@ class RegisterRouteState extends State<RegisterRoute> {
                       ),
                       InkWell(
                         onTap: () {
-                            Navigator.push(
+                          Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => RegisterRoute()), //ย้ายหน้า
+                                builder: (context) =>
+                                    RegisterRoute()), //ย้ายหน้า
                           );
                         },
                         child: Text("SignUp",
