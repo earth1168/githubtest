@@ -257,13 +257,6 @@ class HomeRouteState extends State<HomeRoute> {
   void changePage(int index) {
     setState(() {
       _currentIndex = index;
-      if(index==0){
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => HomeRoute()), //ย้ายหน้า
-                          );        
-      }
       if(index==2){
                           Navigator.push(
                             context,

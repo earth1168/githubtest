@@ -4,6 +4,8 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'movie_detail.dart';
 import 'config.dart';
+import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
+import 'style.dart';
 
 class MovieList extends StatefulWidget {
   @override
@@ -15,12 +17,35 @@ class MovieList extends StatefulWidget {
 class MovieListState extends State<MovieList> {
   var movies;
   Color mainColor = const Color(0xff3C3261);
+  int _currentIndex;
 
   void getData() async {
     var data = await getJson();
 
     setState(() {
       movies = data['results'];
+    });
+  }
+
+  void initState() {
+    super.initState();
+    _currentIndex = 2;
+  }
+
+  void changePage(int index) {
+    setState(() {
+      _currentIndex = index;
+      if (index == 0) {
+        Navigator.pop(context);
+        index = 0;
+      }
+      if (index == 2) {
+        /*                Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MovieRoute()), //ย้ายหน้า
+                          );        */
+      }
     });
   }
 
@@ -75,6 +100,51 @@ class MovieListState extends State<MovieList> {
                     );
                   }),
             )
+          ],
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: EdgeInsets.only(bottom: 12),
+        child: BubbleBottomBar(
+          backgroundColor: Colors.transparent,
+          opacity: 1,
+          elevation: 0,
+          currentIndex: _currentIndex,
+          onTap: changePage,
+          items: <BubbleBottomBarItem>[
+            BubbleBottomBarItem(
+              backgroundColor: Colors.black,
+              icon: Icon(
+                Icons.home,
+                color: Colors.black,
+              ),
+              activeIcon: Icon(Icons.home, color: Colors.white),
+              title: Text("Home", style: bottomBarItemStyle),
+            ),
+            BubbleBottomBarItem(
+                backgroundColor: Colors.black,
+                icon: Icon(
+                  Icons.shopping_basket,
+                  color: Colors.black,
+                ),
+                activeIcon: Icon(Icons.shopping_basket, color: Colors.white),
+                title: Text("Shop", style: bottomBarItemStyle)),
+            BubbleBottomBarItem(
+                backgroundColor: Colors.black,
+                icon: Icon(
+                  Icons.favorite_border,
+                  color: Colors.black,
+                ),
+                activeIcon: Icon(Icons.favorite_border, color: Colors.white),
+                title: Text("Favorite", style: bottomBarItemStyle)),
+            BubbleBottomBarItem(
+                backgroundColor: Colors.black,
+                icon: Icon(
+                  Icons.person,
+                  color: Colors.black,
+                ),
+                activeIcon: Icon(Icons.person, color: Colors.white),
+                title: Text("Profile", style: bottomBarItemStyle))
           ],
         ),
       ),
