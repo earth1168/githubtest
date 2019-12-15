@@ -29,6 +29,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   bubble_bottom_bar: ^1.2.0
   smooth_star_rating: 1.0.3  
+  http: any
 
 dev_dependencies:
   flutter_test:

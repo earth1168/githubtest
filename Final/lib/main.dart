@@ -10,6 +10,7 @@ import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
+import 'movie_list.dart';
 
 void main() => runApp(MaterialApp(
       home: MyApp(),
@@ -236,24 +237,7 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-class SecondRoute extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Second Route"),
-      ),
-      body: Center(
-        child: RaisedButton(
-          onPressed: () {
-            Navigator.pop(context); //log out or back to previous page
-          },
-          child: Text('Go back!'),
-        ),
-      ),
-    );
-  }
-}
+
 
 class HomeRoute extends StatefulWidget {
   @override
@@ -273,6 +257,21 @@ class HomeRouteState extends State<HomeRoute> {
   void changePage(int index) {
     setState(() {
       _currentIndex = index;
+      if(index==0){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomeRoute()), //ย้ายหน้า
+                          );        
+      }
+      if(index==2){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MovieRoute()), //ย้ายหน้า
+                          );        
+      }
+
     });
   }
 
@@ -436,6 +435,7 @@ class HomeRouteState extends State<HomeRoute> {
               icon: Icon(
                 Icons.home,
                 color: Colors.black,
+                
               ),
               activeIcon: Icon(Icons.home, color: Colors.white),
               title: Text("Home", style: bottomBarItemStyle),
@@ -450,12 +450,15 @@ class HomeRouteState extends State<HomeRoute> {
                 title: Text("Shop", style: bottomBarItemStyle)),
             BubbleBottomBarItem(
                 backgroundColor: Colors.black,
+                
                 icon: Icon(
-                  Icons.favorite_border,
+                  Icons.favorite_border,                  
                   color: Colors.black,
+                  
                 ),
                 activeIcon: Icon(Icons.favorite_border, color: Colors.white),
-                title: Text("Favorite", style: bottomBarItemStyle)),
+                title: Text("Favorite", style: bottomBarItemStyle)
+                ),
             BubbleBottomBarItem(
                 backgroundColor: Colors.black,
                 icon: Icon(
@@ -586,6 +589,7 @@ class PhotoTextState extends State<PhotoText> {
                             image: FileImage(imageFile), fit: BoxFit.cover))),
               )
             : Container(),
+         _decideImageView(),    
         SizedBox(height: 10.0),
         RaisedButton(
           onPressed: () {
@@ -605,5 +609,35 @@ class PhotoTextState extends State<PhotoText> {
         )*/
       ],
     ));
+  }
+}
+
+class MovieRoute extends StatelessWidget {
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+
+      body: MovieList(),
+    );
+  }
+}
+
+class SecondRoute extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Second Route"),
+      ),
+      body: Center(
+        child: RaisedButton(
+          onPressed: () {
+            Navigator.pop(context); //log out or back to previous page
+          },
+          child: Text('Go back!'),
+        ),
+      ),
+    );
   }
 }
