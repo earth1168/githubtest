@@ -1,4 +1,4 @@
-name: dailiaw
+name: headphone_app_ui
 description: A new Flutter project.
 
 # The following defines the version and build number for your application.
@@ -15,26 +15,20 @@ version: 1.0.0+1
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
-  
+
 dependencies:
   flutter:
     sdk: flutter
-     # add flutter_ScreenUtil
-  flutter_screenutil: ^0.6.0
-
-
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   bubble_bottom_bar: ^1.2.0
-  smooth_star_rating: 1.0.3  
+  smooth_star_rating: 1.0.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
-
 
 
 # For information on the generic Dart part of this file, see the
@@ -48,15 +42,9 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
+  # To add assets to your application, add an assets section, like this:
   assets:
    - assets/
-  # To add assets to your application, add an assets section, like this:
-  # assets:
-  #  - assets/image_01.png
-  #  - assets/image_02.png
-  #  - assets/logo.png
-
- 
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -69,19 +57,6 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #      - family: CustomIcons
-  #    fonts:
-  #      - asset: assets/CustomIcons.ttf
-  #
-  #  - family: Poppins-Bold
-  #    fonts:
-  #     - asset: assets/Poppins-Bold.ttf
-  #
-  #  - family: Poppins-Medium
-  #    fonts:
-  #      - asset: assets/Poppins-Medium.ttf
-  #
   fonts:
     - family: Sofiapro
       fonts:
@@ -97,9 +72,6 @@ flutter:
     - family: customIcons
       fonts:
         - asset: assets/fonts/customIcons2.ttf
-
-
-
-
+   
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
