@@ -59,7 +59,8 @@ class MovieListState extends State<MovieList> {
         elevation: 0.3,
         centerTitle: true,
         backgroundColor: Colors.white,
-        leading: new Icon(
+        leading: new Icon(    
+                
           Icons.arrow_back,
           color: mainColor,
         ),
@@ -154,7 +155,8 @@ class MovieListState extends State<MovieList> {
 
 Future<Map> getJson() async {
   var apiKey = getApiKey();
-  var url = 'http://api.themoviedb.org/3/discover/movie?api_key=${apiKey}';
+  var searchmovie = 'avenger';
+  var url = 'https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchmovie}';
   var response = await http.get(url);
   return json.decode(response.body);
 }
@@ -169,7 +171,7 @@ class MovieTitle extends StatelessWidget {
     return new Padding(
       padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
       child: new Text(
-        'Top Rated',
+        'Movie listed',
         style: new TextStyle(
             fontSize: 40.0,
             color: mainColor,
