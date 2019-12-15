@@ -7,6 +7,9 @@ import 'style.dart';
 import 'model/model.dart';
 import 'Widgets/ProductCard.dart';
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
+import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 
 void main() => runApp(MaterialApp(
       home: MyApp(),
@@ -213,10 +216,11 @@ class _MyAppState extends State<MyApp> {
                       ),
                       RaisedButton(
                         child: Text('Open Route'),
-                        onPressed:(){
+                        onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder:(context)=>HomeRoute()),
+                            MaterialPageRoute(
+                                builder: (context) => HomeRoute()), //ย้ายหน้า
                           );
                         },
                       ),
@@ -231,6 +235,7 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
+
 class SecondRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -252,7 +257,8 @@ class SecondRoute extends StatelessWidget {
 
 class HomeRoute extends StatefulWidget {
   @override
-  HomeRouteState createState() => HomeRouteState();               //เปิดรูปไม่ได้ไม่รู้เป็นอะไร
+  HomeRouteState createState() =>
+      HomeRouteState(); //เปิดรูปไม่ได้ไม่รู้เป็นอะไร
 }
 
 class HomeRouteState extends State<HomeRoute> {
@@ -286,19 +292,24 @@ class HomeRouteState extends State<HomeRoute> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   IconButton(
-                    icon: Icon(CustomIcons.menu),
+                    icon: Icon(Icons.menu),
                     onPressed: () {},
                   ),
                   IconButton(
-                    icon: Icon(CustomIcons.camera),
-                    onPressed: () {},
+                    icon: Icon(Icons.camera_alt),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => PhotoText()),
+                      );
+                    },
                   )
                 ],
               ),
             ),
             Padding(
               padding: EdgeInsets.only(left: 25),
-              child: Text("MOVIE", style: headingStyle), 
+              child: Text("SeeDee", style: headingStyle),
             ),
             SizedBox(
               height: 22,
@@ -324,7 +335,7 @@ class HomeRouteState extends State<HomeRoute> {
                         border: InputBorder.none,
                         hintText: "Search...",
                         hintStyle: searchBarStyle,
-                        suffixIcon: Icon(CustomIcons.search)),
+                        suffixIcon: Icon(Icons.search)),
                   ),
                 ),
               ),
@@ -385,11 +396,13 @@ class HomeRouteState extends State<HomeRoute> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Text("Star Wars : Episode VIII", style: productTitleStyle),
+                              Text("Star Wars : Episode VIII",
+                                  style: productTitleStyle),
                               SizedBox(
                                 height: 4,
                               ),
-                              Text("The last Jedi , IMDb : 7.1\n Mark Hamill ,...",
+                              Text(
+                                  "The last Jedi , IMDb : 7.1\n Mark Hamill ,...",
                                   style: speakerdescStyle)
                             ],
                           ),
@@ -455,5 +468,88 @@ class HomeRouteState extends State<HomeRoute> {
         ),
       ),
     );
+  }
+}
+
+class PhotoText extends StatefulWidget {
+  @override
+  PhotoTextState createState() => PhotoTextState();
+}
+
+class PhotoTextState extends State<PhotoText> {
+  File pickedImage;
+
+  bool isImageLoaded = false;
+
+  Future pickImage() async {
+    var tempStore = await ImagePicker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      pickedImage = tempStore;
+      isImageLoaded = true;
+    });
+  }
+
+  Future readText() async {
+    FirebaseVisionImage ourImage = FirebaseVisionImage.fromFile(pickedImage);
+    TextRecognizer recognizeText = FirebaseVision.instance.textRecognizer();
+    VisionText readText = await recognizeText
+        .processImage(ourImage); //text ที่อ่านได้อยู่ใน readText
+
+    for (TextBlock block in readText.blocks) {
+      for (TextLine line in block.lines) {
+        print(line.text);
+        /*
+        for (TextElement word in line.elements) {
+          print(word.text);          
+        }*/
+      }
+    }
+  }
+
+  /*
+  Future decode() async {
+    FirebaseVisionImage ourImage = FirebaseVisionImage.fromFile(pickedImage);
+    BarcodeDetector barcodeDetector = FirebaseVision.instance.barcodeDetector();
+    List barCodes = await barcodeDetector.detectInImage(ourImage);
+
+    for (Barcode readableCode in barCodes) {
+      print(readableCode.displayValue);
+    }
+  }
+ */
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: Column(
+      children: <Widget>[
+        SizedBox(height: 100.0),
+        isImageLoaded
+            ? Center(
+                child: Container(
+                    height: 200.0,
+                    width: 200.0,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: FileImage(pickedImage), fit: BoxFit.cover))),
+              )
+            : Container(),
+        SizedBox(height: 10.0),
+        RaisedButton(
+          child: Text('Pick an image'),
+          onPressed: pickImage,
+        ),
+        SizedBox(height: 10.0),
+        RaisedButton(
+          child: Text('Read Text'),
+          onPressed: readText,
+        ),
+        /*
+        RaisedButton(
+          child: Text('Read Bar Code'),
+          onPressed: decode,
+        )*/
+      ],
+    ));
   }
 }
