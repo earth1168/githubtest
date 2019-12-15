@@ -120,7 +120,7 @@ class _MyAppState extends State<MyApp> {
                           SizedBox(
                             width: 8.0,
                           ),
-                          Text("Remember mssememe",
+                          Text("Remember me",
                               style: TextStyle(
                                   fontSize: 12, fontFamily: "Poppins-Medium"))
                         ],
@@ -477,21 +477,73 @@ class PhotoText extends StatefulWidget {
 }
 
 class PhotoTextState extends State<PhotoText> {
-  File pickedImage;
-
+  File imageFile;
   bool isImageLoaded = false;
-
-  Future pickImage() async {
-    var tempStore = await ImagePicker.pickImage(source: ImageSource.gallery);
-
-    setState(() {
-      pickedImage = tempStore;
+  _openGallery(BuildContext context) async {
+    var picture = await ImagePicker.pickImage(source: ImageSource.gallery);
+    this.setState(() {
+      imageFile = picture;
       isImageLoaded = true;
     });
+    Navigator.of(context).pop();
   }
 
+  _openCamera(BuildContext context) async {
+    var picture = await ImagePicker.pickImage(source: ImageSource.camera);
+    this.setState(() {
+      imageFile = picture;
+      isImageLoaded = true;
+    });
+    Navigator.of(context).pop();
+  }
+
+  Future<void> showChoiceDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Make a Choice!"),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  GestureDetector(
+                    child: Text("Gallery"),
+                    onTap: () {
+                      _openGallery(context);
+                    },
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                  ),
+                  GestureDetector(
+                    child: Text("Camera"),
+                    onTap: () {
+                      _openCamera(context);
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  Widget _decideImageView() {
+    if (imageFile == null) {
+      return Text("No Image Selected!");
+    } else {
+      return Image.file(
+        imageFile,
+        width: 400,
+        height: 400,
+      );
+    }
+  }
+
+/* FIREBASE MLKIT ZONE  */
   Future readText() async {
-    FirebaseVisionImage ourImage = FirebaseVisionImage.fromFile(pickedImage);
+    FirebaseVisionImage ourImage =
+        FirebaseVisionImage.fromFile(imageFile); //pickedimage = File
     TextRecognizer recognizeText = FirebaseVision.instance.textRecognizer();
     VisionText readText = await recognizeText
         .processImage(ourImage); //text ที่อ่านได้อยู่ใน readText
@@ -531,13 +583,15 @@ class PhotoTextState extends State<PhotoText> {
                     width: 200.0,
                     decoration: BoxDecoration(
                         image: DecorationImage(
-                            image: FileImage(pickedImage), fit: BoxFit.cover))),
+                            image: FileImage(imageFile), fit: BoxFit.cover))),
               )
             : Container(),
         SizedBox(height: 10.0),
         RaisedButton(
+          onPressed: () {
+            showChoiceDialog(context);
+          },
           child: Text('Pick an image'),
-          onPressed: pickImage,
         ),
         SizedBox(height: 10.0),
         RaisedButton(
