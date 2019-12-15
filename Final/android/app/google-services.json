@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "374848146959",
+    "firebase_url": "https://seedee-9198d.firebaseio.com",
+    "project_id": "seedee-9198d",
+    "storage_bucket": "seedee-9198d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:374848146959:android:341a455d5dc51b7e98dd7a",
+        "android_client_info": {
+          "package_name": "com.seedee.dailiaw"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "374848146959-dq67l1sjvofa8ffhh4m1f15sc6b2trib.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAk4_0_lnwJdLngaH0b7LkpT9WkPVSNfsQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "374848146959-dq67l1sjvofa8ffhh4m1f15sc6b2trib.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
