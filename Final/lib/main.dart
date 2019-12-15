@@ -206,7 +206,16 @@ class _MyAppState extends State<MyApp> {
                             style: TextStyle(
                                 color: Color(0xFF5d74e3),
                                 fontFamily: "Poppins-Bold")),
-                      )
+                      ),
+                      RaisedButton(
+                        child: Text('Open Route'),
+                        onPressed:(){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder:(context)=>SecondRoute()),
+                          );
+                        },
+                      ),
                     ],
                   )
                 ],
@@ -214,6 +223,24 @@ class _MyAppState extends State<MyApp> {
             ),
           )
         ],
+      ),
+    );
+  }
+}
+class SecondRoute extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Second Route"),
+      ),
+      body: Center(
+        child: RaisedButton(
+          onPressed: () {
+            Navigator.pop(context); //log out
+          },
+          child: Text('Go back!'),
+        ),
       ),
     );
   }
