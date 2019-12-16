@@ -12,6 +12,7 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'movie_list.dart';
+import 'login_page.dart';
 
 void main() => runApp(MaterialApp(
       home: MyApp(),
@@ -194,8 +195,15 @@ class _MyAppState extends State<MyApp> {
                           Color(0xFFff4f38),
                           Color(0xFFff355d),
                         ],
-                        iconData: CustomIcons.googlePlus,
-                        onPressed: () {},
+                        iconData: Icons.mail,
+                        onPressed: () {
+                           Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    AuthRoute()), //ย้ายหน้า
+                          );                         
+                        },
                       ),
                     ],
                   ),
@@ -223,7 +231,7 @@ class _MyAppState extends State<MyApp> {
                                 color: Color(0xFF5d74e3),
                                 fontFamily: "Poppins-Bold")),
                       ),
-                      RaisedButton(
+              /*        RaisedButton(
                         child: Text('Open Route'),
                         onPressed: () {
                           Navigator.push(
@@ -232,7 +240,8 @@ class _MyAppState extends State<MyApp> {
                                 builder: (context) => HomeRoute()), //ย้ายหน้า
                           );
                         },
-                      ),
+                      )
+                      , */
                     ],
                   )
                 ],
@@ -269,6 +278,12 @@ class HomeRouteState extends State<HomeRoute> {
           MaterialPageRoute(builder: (context) => MovieRoute()), //ย้ายหน้า
         );
       }
+      if (index == 3) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => FirstScreen()), //ย้ายหน้า
+        );
+      }      
     });
   }
 
@@ -409,7 +424,7 @@ class HomeRouteState extends State<HomeRoute> {
                   Positioned(
                     right: 15,
                     top: -5,
-                    child: Image.asset("assets/image4.png",
+                    child: Image.asset("assets/image5.jng",
                         fit: BoxFit.cover, width: 150, height: 160),
                   )
                 ],
@@ -524,17 +539,6 @@ class PhotoTextState extends State<PhotoText> {
         });
   }
 
-  Widget _decideImageView() {
-    if (imageFile == null) {
-      return Text("No Image Selected!");
-    } else {
-      return Image.file(
-        imageFile,
-        width: 400,
-        height: 400,
-      );
-    }
-  }
 
 /* FIREBASE MLKIT ZONE  */
   Future readText() async {
@@ -694,12 +698,12 @@ class RegisterRouteState extends State<RegisterRoute> {
             children: <Widget>[
               Padding(
                 padding: EdgeInsets.only(top: 20.0),
-                child: Image.asset("assets/image_01.png"),
+                child: Image.asset("assets/images6.jpg"),
               ),
               Expanded(
                 child: Container(),
               ),
-              Image.asset("assets/image_02.png")
+              Image.asset("assets/images7.jpg")
             ],
           ),
           SingleChildScrollView(
@@ -861,6 +865,18 @@ class RegisterRouteState extends State<RegisterRoute> {
           )
         ],
       ),
+    );
+  }
+}
+class AuthRoute extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Login',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: LoginPage(),
     );
   }
 }
